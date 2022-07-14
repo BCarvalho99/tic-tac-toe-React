@@ -1,22 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Box from "./components/box/box";
+import { useState } from "react";
 
 function App() {
+  const [isX, setIsX] = useState(true);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="line">
+          <Box setIsX={setIsX} isX={isX} />
+          <Box isMiddle setIsX={setIsX} isX={isX} />
+          <Box setIsX={setIsX} isX={isX} />
+        </div>
+        <div className="line middle-horizontal">
+          <Box setIsX={setIsX} isX={isX} />
+          <Box isMiddle setIsX={setIsX} isX={isX} />
+          <Box setIsX={setIsX} isX={isX} />
+        </div>
+        <div className="line">
+          <Box setIsX={setIsX} isX={isX} />
+          <Box isMiddle setIsX={setIsX} isX={isX} />
+          <Box setIsX={setIsX} isX={isX} />
+        </div>
       </header>
     </div>
   );
