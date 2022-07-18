@@ -6,8 +6,6 @@ function Box({ isMiddle, setIsX, isX }) {
   return (
     <div
       onClick={() => {
-        console.log(isClicked);
-
         if (!isClicked) {
           setIsClicked(true);
           setValorA(isX ? "X" : "O");
