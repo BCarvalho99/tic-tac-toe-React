@@ -1,9 +1,26 @@
 import "./App.css";
-import Box from "./components/box/box";
+import AppBox from "./components/box/app-box";
 import { useState, useEffect } from "react";
+import { Modal, Typography, Box } from "@mui/material";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 600,
+  height: 100,
+  bgcolor: "#155cf6",
+  border: "2px solid #000",
+  boxShadow: 24,
+
+  p: 4,
+};
 
 function App() {
   const [isX, setIsX] = useState(true);
+  const [open, setOpen] = useState(false);
+
   const winConditions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -23,31 +40,45 @@ function App() {
         boxes[condition[0]].innerHTML == boxes[condition[1]].innerHTML &&
         boxes[condition[0]].innerHTML == boxes[condition[2]].innerHTML
       ) {
-        alert("WON");
+        setOpen(true);
       }
     });
   }, [isX]);
 
+  const close = () => {
+    setOpen(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="line">
-          <Box setIsX={setIsX} isX={isX} />
-          <Box isMiddle setIsX={setIsX} isX={isX} />
-          <Box setIsX={setIsX} isX={isX} />
-        </div>
-        <div className="line middle-horizontal">
-          <Box setIsX={setIsX} isX={isX} />
-          <Box isMiddle setIsX={setIsX} isX={isX} />
-          <Box setIsX={setIsX} isX={isX} />
-        </div>
-        <div className="line">
-          <Box setIsX={setIsX} isX={isX} />
-          <Box isMiddle setIsX={setIsX} isX={isX} />
-          <Box setIsX={setIsX} isX={isX} />
-        </div>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <header className="App-header">
+          <div className="line">
+            <AppBox open={open} setIsX={setIsX} isX={isX} />
+            <AppBox open={open} isMiddle setIsX={setIsX} isX={isX} />
+            <AppBox open={open} setIsX={setIsX} isX={isX} />
+          </div>
+          <div className="line middle-horizontal">
+            <AppBox open={open} setIsX={setIsX} isX={isX} />
+            <AppBox open={open} isMiddle setIsX={setIsX} isX={isX} />
+            <AppBox open={open} setIsX={setIsX} isX={isX} />
+          </div>
+          <div className="line">
+            <AppBox open={open} setIsX={setIsX} isX={isX} />
+            <AppBox open={open} isMiddle setIsX={setIsX} isX={isX} />
+            <AppBox open={open} setIsX={setIsX} isX={isX} />
+          </div>
+        </header>
+      </div>
+
+      <Modal open={open} onClose={close}>
+        <Box sx={style}>
+          <div className="modal-modal-description" sx={{ mt: 2 }}>
+            O JOGO ENCERROU!
+          </div>
+        </Box>
+      </Modal>
+    </>
   );
 }
 

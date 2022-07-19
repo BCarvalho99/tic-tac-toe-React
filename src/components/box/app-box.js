@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function Box({ isMiddle, setIsX, isX }) {
+function AppBox({ isMiddle, setIsX, isX, open }) {
   const [isClicked, setIsClicked] = useState(false);
   const [valorA, setValorA] = useState("");
+  useEffect(() => {
+    if (!open) {
+      setIsClicked(false);
+      setValorA("");
+      setIsX(true);
+    }
+  }, [open]);
   return (
     <div
       onClick={() => {
@@ -19,4 +26,4 @@ function Box({ isMiddle, setIsX, isX }) {
   );
 }
 
-export default Box;
+export default AppBox;
